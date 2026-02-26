@@ -133,11 +133,15 @@ class ExtractionAgent:
             "fyi": 0.1, "newsletter": 0.1,
         }
 
-        max_score = 0.5
+        matched_scores = []
         for signal in signals:
             signal_lower = signal.lower()
             for keyword, score in importance_keywords.items():
                 if keyword in signal_lower:
-                    max_score = max(max_score, score)
+                    matched_scores.append(score)
+
+        if not matched_scores:
+            return 0.5
+        max_score = max(matched_scores)
 
         return min(max_score, 1.0)

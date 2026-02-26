@@ -1,0 +1,47 @@
+[
+  {
+    "id": "email_001",
+    "thread_id": "thread_001",
+    "subject": "Q4 Budget Review - Action Required by EOD Wednesday",
+    "sender": "cfo@company.com",
+    "sender_name": "CFO",
+    "recipients": ["team@company.com"],
+    "cc": [],
+    "date": "2026-02-25T09:00:00",
+    "body": "Team, please review Q4 budget allocations and provide feedback by EOD Wednesday. Department heads need to confirm spend vs forecast before the board meeting next Monday. Engineering should also submit revised cloud infrastructure costs by Friday.",
+    "snippet": "Please review Q4 budget allocations and provide feedback by EOD Wednesday.",
+    "labels": ["INBOX", "UNREAD"],
+    "is_reply": false,
+    "has_attachments": false
+  },
+  {
+    "id": "email_002",
+    "thread_id": "thread_002",
+    "subject": "URGENT: Production server down",
+    "sender": "alerts@monitoring.com",
+    "sender_name": "System Alerts",
+    "recipients": ["devops@company.com"],
+    "cc": [],
+    "date": "2026-02-26T03:15:00",
+    "body": "CRITICAL: Production server #3 is unreachable. Immediate action required. Please investigate and resolve ASAP.",
+    "snippet": "CRITICAL: Production server #3 is unreachable.",
+    "labels": ["INBOX", "UNREAD"],
+    "is_reply": false,
+    "has_attachments": false
+  },
+  {
+    "id": "email_003",
+    "thread_id": "thread_003",
+    "subject": "AI Weekly Newsletter - Feb 26",
+    "sender": "newsletter@ainews.com",
+    "sender_name": "AI News Weekly",
+    "recipients": ["user@company.com"],
+    "cc": [],
+    "date": "2026-02-26T08:00:00",
+    "body": "This week in AI: OpenAI releases new model, Google DeepMind announces breakthrough, Meta open-sources new LLM. Read more at our website.",
+    "snippet": "This week in AI: OpenAI releases new model...",
+    "labels": ["INBOX"],
+    "is_reply": false,
+    "has_attachments": false
+  }
+]
