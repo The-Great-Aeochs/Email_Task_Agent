@@ -1,26 +1,26 @@
-# 📧 Bharat Email Task Agent
+# 📧 Email Task Agent
 
-> AI-powered email task extraction and prioritization agent for Bharat Ventures — built with Claude + MCP + Skills
+> AI-powered email task extraction and prioritization agent — built with Claude + MCP + Skills
 
 An intelligent agent that reads your Gmail inbox, extracts actionable tasks from emails, prioritizes them using the Eisenhower Matrix, and optionally syncs deadlines with Google Calendar. Built for the Claude Code ecosystem with both **MCP integration** and **Claude Code Skills** support.
 
-## ✨ What Makes This Different?
+## ✨ Key Capabilities
 
-| Feature | daily-email-task-agent (original) | **This Agent** |
-|---------|-----------------------------------|----------------|
-| LLM Backend | OpenAI GPT-4o-mini | **Claude (Anthropic)** |
-| Email Access | Gmail API (manual OAuth) | **Gmail MCP + Skills** |
-| Calendar | ❌ | **Google Calendar MCP** |
-| Architecture | Monolithic FastAPI | **Multi-agent pipeline** |
-| Prioritization | Simple high/medium/low | **Eisenhower Matrix + deadline scoring** |
-| Deployment | Self-hosted only | **Claude Code native + standalone** |
-| Dashboard | Basic web UI | **Rich CLI + optional web UI** |
+| Capability | Details |
+|------------|---------|
+| LLM Backend | Claude (Anthropic) |
+| Email Access | Gmail API with OAuth |
+| Calendar | Google Calendar MCP |
+| Architecture | Multi-agent pipeline |
+| Prioritization | Eisenhower Matrix + deadline scoring |
+| Deployment | Claude Code native + standalone CLI |
+| Output | Rich CLI + optional web UI |
 
 ## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    BHARAT EMAIL AGENT                     │
+│                    EMAIL TASK AGENT                       │
 ├─────────────────────────────────────────────────────────┤
 │                                                           │
 │  ┌──────────┐   ┌──────────────┐   ┌──────────────────┐ │
@@ -50,8 +50,8 @@ An intelligent agent that reads your Gmail inbox, extracts actionable tasks from
 
 ```bash
 # Clone the repo
-git clone https://github.com/bharat-ventures/email-task-agent.git
-cd email-task-agent
+git clone https://github.com/The-Great-Aeochs/Email_Task_Agent.git
+cd Email_Task_Agent
 
 # Install as a Claude Code Skill
 cp -r skills/gmail ~/.claude/skills/gmail
@@ -65,8 +65,8 @@ cp -r skills/email-triage ~/.claude/skills/email-triage
 
 ```bash
 # Clone & install
-git clone https://github.com/bharat-ventures/email-task-agent.git
-cd email-task-agent
+git clone https://github.com/The-Great-Aeochs/Email_Task_Agent.git
+cd Email_Task_Agent
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -79,14 +79,14 @@ cp .env.example .env
 python scripts/setup_google_auth.py
 
 # Run the agent
-python -m src.main --mode extract --emails 20
-python -m src.main --mode prioritize
-python -m src.main --mode brief  # Generate daily brief
+python main.py --mode extract --emails 20
+python main.py --mode prioritize
+python main.py --mode brief  # Generate daily brief
 ```
 
 ### Option 3: MCP Integration (Claude Desktop / claude.ai)
 
-If you have Gmail MCP connected in Claude.ai or Claude Desktop, the agent can work directly through MCP. See [MCP Setup Guide](docs/MCP_SETUP.md).
+If you have Gmail MCP connected in Claude.ai or Claude Desktop, the agent can work directly through MCP. See [MCP Setup Guide](MCP_SETUP.md).
 
 ## 📋 Features
 
@@ -116,9 +116,9 @@ If you have Gmail MCP connected in Claude.ai or Claude Desktop, the agent can wo
 ### 3. VIP Sender Detection
 Configure important senders (boss, key clients) for automatic priority boosting:
 ```yaml
-# config/vip_senders.yaml
+# vip_senders.yaml
 vip_senders:
-  - email: "ceo@bharatventures.com"
+  - email: "ceo@yourcompany.com"
     name: "CEO"
     priority_boost: 2
   - domain: "client-corp.com"
@@ -132,7 +132,7 @@ Generates a concise markdown brief every morning:
 ## 📋 Daily Brief — Feb 26, 2026
 
 ### 🔴 P0: Do Now (3 tasks)
-1. Review investor deck — from: ceo@bharatventures.com — Due: Today
+1. Review investor deck — from: ceo@yourcompany.com — Due: Today
 2. Submit compliance report — from: legal@corp.com — Due: Today 5PM
 3. Fix production bug #342 — from: alerts@monitoring.com — Due: ASAP
 
@@ -177,50 +177,21 @@ When I ask about emails, tasks, or priorities:
 ## 📁 Project Structure
 
 ```
-bharat-email-agent/
+Email_Task_Agent/
 ├── src/
-│   ├── main.py                 # CLI entry point
 │   ├── agents/
 │   │   ├── extraction.py       # Task extraction agent
 │   │   ├── prioritization.py   # Eisenhower matrix prioritization
 │   │   └── briefing.py         # Daily brief generator
 │   ├── tools/
 │   │   ├── gmail_client.py     # Gmail API wrapper
-│   │   ├── calendar_client.py  # Google Calendar integration
 │   │   └── task_store.py       # SQLite task persistence
 │   ├── models/
-│   │   ├── task.py             # Task data models
-│   │   └── email.py            # Email data models
+│   │   └── task.py             # Task data models
 │   └── utils/
-│       ├── prompts.py          # All Claude prompts
-│       └── date_parser.py      # Natural language date parsing
-├── skills/                      # Claude Code Skills
-│   ├── gmail/
-│   │   ├── SKILL.md
-│   │   └── scripts/
-│   │       ├── search_gmail.py
-│   │       └── fetch_email.py
-│   └── email-triage/
-│       ├── SKILL.md
-│       └── scripts/
-│           └── extract_tasks.py
-├── config/
-│   ├── vip_senders.yaml        # VIP sender configuration
-│   └── extraction_rules.yaml   # Custom extraction rules
-├── scripts/
-│   ├── setup_google_auth.py    # Google OAuth setup
-│   └── run_daily.sh            # Cron-compatible daily runner
-├── tests/
-│   ├── test_extraction.py
-│   ├── test_prioritization.py
-│   └── fixtures/
-│       └── sample_emails.json
-├── docs/
-│   ├── MCP_SETUP.md
-│   ├── SKILLS_GUIDE.md
-│   └── ARCHITECTURE.md
-├── .env.example
-├── .gitignore
+│       └── prompts.py          # All Claude prompts
+├── main.py                     # CLI entry point
+├── vip_senders.yaml            # VIP sender configuration
 ├── requirements.txt
 ├── pyproject.toml
 ├── Dockerfile
@@ -237,14 +208,14 @@ pytest tests/ -v
 pytest tests/test_extraction.py -v --fixtures
 
 # Test with your actual emails (requires auth)
-python -m src.main --mode test --emails 5
+python main.py --mode extract --emails 5
 ```
 
 ## 🐳 Docker
 
 ```bash
-docker build -t bharat-email-agent .
-docker run -v $(pwd)/.env:/app/.env bharat-email-agent --mode brief
+docker build -t email-task-agent .
+docker run -v $(pwd)/.env:/app/.env email-task-agent --mode brief
 ```
 
 ## 🗺️ Roadmap
@@ -256,7 +227,7 @@ docker run -v $(pwd)/.env:/app/.env bharat-email-agent --mode brief
 - [x] VIP sender detection
 - [ ] Slack notification integration
 - [ ] Google Tasks / Todoist sync
-- [ ] Multi-language support (Hindi emails)
+- [ ] Multi-language support
 - [ ] Team dashboard (web UI)
 - [ ] Webhook triggers for new high-priority tasks
 
@@ -274,11 +245,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgements
 
-- Inspired by [daily-email-task-agent](https://github.com/Suganthi2496/daily-email-task-agent)
 - Architecture informed by [LangChain agents-from-scratch](https://github.com/langchain-ai/agents-from-scratch)
 - Skills pattern from [jlongster's Gmail workflow](https://jlongster.com/wrangling-email-claude-code)
 - MCP approach from [Harper Reed's email productivity](https://harper.blog/2025/12/03/claude-code-email-productivity-mcp-agents/)
-
----
-
-**Built for [Bharat Ventures](https://bharatventures.com) 🇮🇳**
