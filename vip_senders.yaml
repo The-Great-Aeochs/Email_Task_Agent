@@ -1,0 +1,33 @@
+# VIP Sender Configuration for Bharat Ventures
+# Tasks from these senders get automatic priority boosting
+#
+# priority_boost: 1 = +0.1 to urgency/importance, 2 = +0.2, etc.
+
+vip_senders:
+  # Leadership
+  - email: "ceo@bharatventures.com"
+    name: "CEO"
+    priority_boost: 2
+
+  - email: "cto@bharatventures.com"
+    name: "CTO"
+    priority_boost: 2
+
+  - email: "coo@bharatventures.com"
+    name: "COO"
+    priority_boost: 2
+
+  # Key clients (match by domain)
+  - domain: "important-client.com"
+    name: "Key Client"
+    priority_boost: 1
+
+  # Investors
+  - domain: "vc-firm.com"
+    name: "Investor"
+    priority_boost: 2
+
+  # Legal / Compliance (always important)
+  - domain: "lawfirm.com"
+    name: "Legal Counsel"
+    priority_boost: 1
