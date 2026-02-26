@@ -32,7 +32,7 @@ def sample_tasks():
             description="Strategic review for next quarter",
             source_email_id="email_002",
             source_subject="Q1 Strategy Review",
-            sender="ceo@bharatventures.com",
+            sender="ceo@yourcompany.com",
             sender_name="CEO",
             deadline=datetime.now() + timedelta(days=5),
             deadline_text="next week",
@@ -45,7 +45,7 @@ def sample_tasks():
             description="Housekeeping task",
             source_email_id="email_003",
             source_subject="Slack cleanup",
-            sender="admin@bharatventures.com",
+            sender="admin@yourcompany.com",
             sender_name="Admin",
             urgency_score=0.6,
             importance_score=0.2,
@@ -79,7 +79,7 @@ class TestPrioritizationAgent:
         """Test VIP sender urgency boosting."""
         agent = PrioritizationAgent(api_key="test-key")
         agent.vip_senders = [
-            {"email": "ceo@bharatventures.com", "name": "CEO", "priority_boost": 2}
+            {"email": "ceo@yourcompany.com", "name": "CEO", "priority_boost": 2}
         ]
 
         original_urgency = sample_tasks[1].urgency_score
@@ -92,10 +92,10 @@ class TestPrioritizationAgent:
         """Test VIP matching by domain."""
         agent = PrioritizationAgent(api_key="test-key")
         agent.vip_senders = [
-            {"domain": "bharatventures.com", "name": "Internal", "priority_boost": 1}
+            {"domain": "yourcompany.com", "name": "Internal", "priority_boost": 1}
         ]
 
-        agent._apply_vip_boost(sample_tasks[1])  # ceo@bharatventures.com
+        agent._apply_vip_boost(sample_tasks[1])  # ceo@yourcompany.com
         assert "vip:Internal" in sample_tasks[1].tags
 
     def test_group_by_priority(self, sample_tasks):
